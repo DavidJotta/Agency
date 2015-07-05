@@ -56,5 +56,6 @@ class Loader {
     if(isset($instance->db)) return false;
     $instance->db = '';
     $instance->db =& new mysqli(Config::$db_host, Config::$db_user, Config::$db_pass, Config::$db_name);
+    $instance->db->set_charset(Config::$db_charset);
   }
 }

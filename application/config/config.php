@@ -25,6 +25,7 @@ class Config {
   public static $db_user = '';
   public static $db_pass = '';
   public static $db_name = '';
+  public static $db_charset = 'utf8';
 
   // URL-related settings
   public static $base_url = ''; // e.g. http(s)://example.com/
