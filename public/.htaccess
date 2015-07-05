@@ -1,0 +1,12 @@
+# jPHP-Framework recommended .htaccess file
+# Feel free to change it and adjust it to fit your needs,
+# but these rules are needed to let the gears move!
+
+# Rewrite stuff
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+# Prevent file browsing
+Options -Indexes

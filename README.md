@@ -11,7 +11,7 @@ jPHP-Framework is a ready-to-go PHP framework built for people who don't want to
 ## Installation
 
 * Download jPHP-Framework and extract
-* Navigate to `application/config/config.php` and tweak it with your settings
+* Navigate to `application/config/Config.php` and tweak it with your settings
 * You are ready to rock! Point your browser to your `base_url` and hopefully see "Hello World!"
 
 ## License

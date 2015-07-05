@@ -18,9 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class Error extends Controller {
-
-	function index() {
-		die('<h1>404 Error</h1><br><p>Looks like this page does not exist!</p>');
-	}
-}
+/**
+ * Include application classes and stuff
+ */
+ require(APP_DIR . 'config/Config.php');
+ require(SYS_DIR . 'Model.php');
+ require(SYS_DIR . 'View.php');
+ require(SYS_DIR . 'Controller.php');
+ require(SYS_DIR . 'Bootstrap.php');
