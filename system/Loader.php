@@ -50,4 +50,11 @@ class Loader {
 		require(APP_DIR . 'helpers/' . ucfirst(strtolower($name)) . '.php');
 		return new $name;
 	}
+
+  function database() {
+    $instance = Controller::get_instance();
+    if(isset($instance->db)) return false;
+    $instance->db = '';
+    $instance->db =& new mysqli(Config::$db_host, Config::$db_user, Config::$db_pass, Config::$db_name);
+  }
 }
