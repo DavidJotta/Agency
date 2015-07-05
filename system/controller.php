@@ -20,17 +20,7 @@
 
 abstract class Controller {
 
-	public function loadModel($name) {
-		require(APP_DIR . 'models/' . ucfirst(strtolower($name)) . '.php');
-		return new $name;
-	}
-
-	public function loadView($name)	{
-		return new View($name);
-	}
-
-	public function loadHelper($name) {
-		require(APP_DIR . 'helpers/' . ucfirst(strtolower($name)) . '.php');
-		return new $name;
+	function __construct() {
+    $this->load = Loader::$instance;
 	}
 }

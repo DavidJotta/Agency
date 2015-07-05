@@ -35,6 +35,7 @@
  * like Controller, View and Model classes, loading plugins, etc.
  */
  require(SYS_DIR . 'Loader.php');
+ $loader = new Loader();
 
 /**
  * And away we go!
@@ -42,4 +43,5 @@
  * So jPHP has been initialized successfully.. now let's show something
  * awesome to the user! :D
  */
- init();
+ $app = new Bootstrap();
+ $app->init();

@@ -18,11 +18,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * Include application classes and stuff
- */
- require(APP_DIR . 'config/Config.php');
- require(SYS_DIR . 'Model.php');
- require(SYS_DIR . 'View.php');
- require(SYS_DIR . 'Controller.php');
- require(SYS_DIR . 'Bootstrap.php');
+class Loader {
+
+  public static $instance;
+
+  function __construct() {
+    /**
+     * Allow the access to $instance
+     */
+     self::$instance = $this;
+    /**
+     * Include application classes and stuff
+     */
+     require(APP_DIR . 'config/Config.php');
+     require(SYS_DIR . 'Model.php');
+     require(SYS_DIR . 'View.php');
+     require(SYS_DIR . 'Controller.php');
+     require(SYS_DIR . 'Bootstrap.php');
+  }
+
+  function model($name) {
+		require(APP_DIR . 'models/' . ucfirst(strtolower($name)) . '.php');
+		return new $name;
+	}
+
+	function view($name)	{
+		return new View($name);
+	}
+
+	function helper($name) {
+		require(APP_DIR . 'helpers/' . ucfirst(strtolower($name)) . '.php');
+		return new $name;
+	}
+}

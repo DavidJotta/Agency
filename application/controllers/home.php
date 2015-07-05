@@ -20,8 +20,12 @@
 
 class Home extends Controller {
 
+	function __construct() {
+		parent::__construct();
+	}
+
 	function index() {
-		$template = $this->loadView('home');
+		$template = $this->load->view('home');
 		$template->render();
 	}
 }
