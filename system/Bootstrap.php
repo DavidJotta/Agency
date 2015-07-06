@@ -21,39 +21,38 @@
 class Bootstrap {
 
   function init() {
-    // Set our defaults
+    // Set defaults
     $controller = Config::$default_controller;
     $action = 'index';
     $url = '';
-  	// Get request url and script url
-  	$request_url = (isset($_SERVER['REQUEST_URI'])) ? parse_url(strtolower($_SERVER['REQUEST_URI'])) : '';
-  	$script_url  = (isset($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : '';
-    // If it is a CRON job, then use the CLI arguments as the URL
-    // Format like "php /path/to/index.php /controller/action"
+  	// Get Request and Script URL
+  	$request_url = (isset($_SERVER['REQUEST_URI'])) ? parse_url(strtolower($_SERVER['REQUEST_URI'])) : ''; // {'/index.php','?id=2'}
+  	$script_url  = (isset($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : ''; // index.php
+    // CRON format like "php /path/to/index.php /controller/action"
     if (!$request_url && isset($_SERVER['SHELL']) && isset($_SERVER['argv']) && isset($_SERVER['argv'][1])) $request_url = $_SERVER['argv'][1];
-  	// Get our url path and trim the / of the left and the right
+  	// Get URL path and trim the left and right /
   	if ($request_url != $script_url) $url = trim(preg_replace('/'. str_replace('/', '\/', strtolower(str_replace('index.php', '', $script_url))) .'/', '', $request_url['path'], 1), '/');
     // Remove string after possible question mark
     if (stripos($url, '?') > 0) $url = substr($url, 0, stripos($url, '?'));
-  	// Split the url into segments
+  	// Split URL into segments
   	$segments = explode('/', $url);
-  	// Do our default checks
+  	// Default checks
   	if (isset($segments[0]) && $segments[0] != '') $controller = $segments[0];
   	if (isset($segments[1]) && $segments[1] != '') $action = $segments[1];
-  	// Get our controller file
+  	// Get Controller file
     $path = APP_DIR . 'controllers/' . $controller . '.php';
   	if (file_exists($path)) require_once($path);
   	else {
       $controller = Config::$error_controller;
       require_once(APP_DIR . 'controllers/' . $controller . '.php');
   	}
-    // Check the action exists
-    if(!method_exists($controller, $action)){
+    // Check if action exists
+    if (!method_exists($controller, $action)) {
       $controller = Config::$default_controller;
       require_once(APP_DIR . 'controllers/' . $controller . '.php');
       $index = 'index';
     }
-  	// Create object and call method
+  	// Create Object and call method
   	$obj = new $controller;
     die(call_user_func_array(array($obj, $action), array_slice($segments, 2)));
   }
