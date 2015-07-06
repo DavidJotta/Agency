@@ -20,23 +20,23 @@
 
 abstract class Controller {
 
-	/**
-	 * Reference to the instance
-	 */
-	private static $instance;
+  /**
+   * Reference to the instance
+   */
+  private static $instance;
 
-	/**
-	 * Allow $instance access and the $this->load shortcut
-	 */
-	public function __construct() {
-		self::$instance =& $this;
+  /**
+   * Allow $instance access and the $this->load shortcut
+   */
+  public function __construct() {
+    self::$instance =& $this;
     $this->load =& Loader::$instance;
-	}
+  }
 
-	/**
-	 * Get the instance
-	 */
-	public static function &get_instance() {
-		return self::$instance;
-	}
+  /**
+   * Get the instance
+   */
+  public static function &get_instance() {
+    return self::$instance;
+  }
 }

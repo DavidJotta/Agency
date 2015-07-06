@@ -20,7 +20,7 @@
 
 class Error extends Controller {
 
-	function index() {
-		die('<h1>404 Error</h1><br><p>Looks like this page does not exist!</p>');
-	}
+  function index() {
+    die('<h1>404 Error</h1><br><p>Looks like this page does not exist!</p>');
+  }
 }

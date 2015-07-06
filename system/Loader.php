@@ -38,18 +38,18 @@ class Loader {
   }
 
   function model($name) {
-		require(APP_DIR . 'models/' . ucfirst(strtolower($name)) . '.php');
-		return new $name;
-	}
+    require(APP_DIR . 'models/' . ucfirst(strtolower($name)) . '.php');
+    return new $name;
+  }
 
-	function view($name)	{
-		return new View($name);
-	}
+  function view($name)	{
+    return new View($name);
+  }
 
-	function helper($name) {
-		require(APP_DIR . 'helpers/' . ucfirst(strtolower($name)) . '.php');
-		return new $name;
-	}
+  function helper($name) {
+    require(APP_DIR . 'helpers/' . ucfirst(strtolower($name)) . '.php');
+    return new $name;
+  }
 
   function database() {
     $instance = Controller::get_instance();
