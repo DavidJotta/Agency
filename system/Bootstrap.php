@@ -37,6 +37,9 @@ class Bootstrap {
     if(!method_exists($this->controller, $this->action)) $this->action = 'index';
     // Load controller
     require_once(APP_DIR . 'controllers/' . $this->controller . '.php');
+    // Remove folders, get class name
+    $this->controller = explode('/', $this->controller);
+    $this->controller = end($this->controller);
     // Create object and call method
     $this->controller = new $this->controller();
     die(call_user_func_array(array($this->controller, $this->action), $this->params));
