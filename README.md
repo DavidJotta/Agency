@@ -26,6 +26,14 @@ Make sure that your "web root" is set to be the public/ directory, the one which
 * Navigate to `application/config/Config.php` and tweak it to fit your needs.
 * You are ready to rock! Point your browser to your `Config::$base_url` and hopefully see a beautiful "Hello world!" screen ^^.
 
+## Donation!
+
+If you are reading this, you probably appreciate my work and are kind enough to buy me a coffee so I can be 2 and a half more hours coding to make this even more awesome! Any amount is really helpful ^^
+
+> 1B2jdJ5zwE98xrEEWLZYGgh3tKBjQZ345p
+
+![Donate Address](https://github.com/DavidJotta/Agency/blob/master/donate_address.png)
+
 ## License
 
 Agency is released free and unencumbered into the public domain. See UNLICENSE file for more information.
