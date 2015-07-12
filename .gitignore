@@ -1,8 +1,12 @@
-## OS generated files
+######################
+# OS generated files #
+######################
 .DS_Store
 .DS_Store?
 ehthumbs.db
 Icon?
 Thumbs.db
-## TODO list
-TODO.md
+########################
+# Agency-related trash #
+########################
+application/cache/*
