@@ -34,9 +34,13 @@ class View {
      */
      self::$instance = $this;
     /**
+     * Load Twig Engine!
+     */
+     $this->engine = new Twig_Environment(new Twig_Loader_Filesystem(APP_DIR . 'views'), array('cache' => APP_DIR . 'cache'));
+    /**
      * Load page template
      */
-     $this->template = APP_DIR . 'views' . DIRECTORY_SEPARATOR . $template . '.php';
+     $this->template = $template . '.html';
   }
 
   /**
@@ -49,17 +53,14 @@ class View {
   /**
    * Set a variable for the view template
    */
-  public function assign($var, $val) {
-    $this->pageVars[$var] = $val;
+  public function assign($key, $value) {
+    $this->pageVars[$key] = $value;
   }
 
   /**
    * Render view template
    */
   public function render() {
-    extract($this->pageVars);
-    ob_start();
-    require($this->template);
-    echo ob_get_clean();
+    echo $this->engine->render($this->template, $this->pageVars);
   }
 }

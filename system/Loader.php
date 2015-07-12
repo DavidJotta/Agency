@@ -28,6 +28,8 @@ class Loader {
      */
      require(APP_DIR . 'config' . DIRECTORY_SEPARATOR . 'Config.php');
      require(SYS_DIR . 'Model.php');
+     require(SYS_DIR . 'Twig' . DIRECTORY_SEPARATOR . 'Autoloader.php');
+     Twig_Autoloader::register();
      require(SYS_DIR . 'View.php');
      require(SYS_DIR . 'Controller.php');
      require(SYS_DIR . 'Session.php');
