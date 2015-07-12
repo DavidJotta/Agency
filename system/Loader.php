@@ -27,6 +27,10 @@ class Loader {
      * Load application core classes
      */
      require(APP_DIR . 'config' . DIRECTORY_SEPARATOR . 'Config.php');
+     if(Config::$debug) {
+       error_reporting(E_ALL);
+       ini_set('display_errors', 1);
+     }
      require(SYS_DIR . 'Model.php');
      require(SYS_DIR . 'Twig' . DIRECTORY_SEPARATOR . 'Autoloader.php');
      Twig_Autoloader::register();

@@ -36,7 +36,7 @@ class View {
     /**
      * Load Twig Engine!
      */
-     $this->engine = new Twig_Environment(new Twig_Loader_Filesystem(APP_DIR . 'views'), array('cache' => APP_DIR . 'cache'));
+     $this->engine = new Twig_Environment(new Twig_Loader_Filesystem(APP_DIR . 'views'), array('cache' => (Config::$debug ? 'false' : APP_DIR . 'cache')));
     /**
      * Load page template
      */

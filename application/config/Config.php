@@ -10,6 +10,9 @@
 
 class Config {
 
+  // Environment settings
+  public static $debug = false;
+
   // MySQL-related settings
   public static $db_host = 'localhost';
   public static $db_user = '';
