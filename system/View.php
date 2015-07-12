@@ -1,36 +1,61 @@
 <?php
 
 /**
- * jPHP-Framework 0.2
- * Copyright (C) 2014-2015 David Juan Ahullana
+ * Agency - a PHP framework for web development
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * @author DavidJotta (https://davidjotta.me)
+ * @link https://github.com/DavidJotta/Agency
+ * @license The Unlicense <http://unlicense.org>
  */
 
 class View {
 
+  /**
+   * @var Instance of the View class
+   */
+  private static $instance;
+
+  /**
+   * @var Store page variables
+   */
   private $pageVars = array();
+
+  /**
+   * @var Store template name
+   */
   private $template;
 
+  /**
+   * View class, used to handle views :P
+   */
   public function __construct($template) {
-    $this->template = APP_DIR . 'views/' . $template . '.php';
+    /**
+     * Allow the use of $this->view
+     */
+     self::$instance = $this;
+    /**
+     * Load page template
+     */
+     $this->template = APP_DIR . 'views' . DIRECTORY_SEPARATOR . $template . '.php';
   }
 
-  public function set($var, $val) {
+  /**
+   * Get the View instance object
+   */
+  public static function &get_instance() {
+    return self::$instance;
+  }
+
+  /**
+   * Set a variable for the view template
+   */
+  public function assign($var, $val) {
     $this->pageVars[$var] = $val;
   }
 
+  /**
+   * Render view template
+   */
   public function render() {
     extract($this->pageVars);
     ob_start();

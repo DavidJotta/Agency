@@ -1,61 +1,90 @@
 <?php
 
 /**
- * jPHP-Framework 0.2
- * Copyright (C) 2014-2015 David Juan Ahullana
+ * Agency - a PHP framework for web development
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * @author DavidJotta (https://davidjotta.me)
+ * @link https://github.com/DavidJotta/Agency
+ * @license The Unlicense <http://unlicense.org>
  */
 
 class Loader {
 
-  public static $instance;
+  /**
+   * @var Instance of the Loader class
+   */
+  private static $instance;
 
-  function __construct() {
+  /**
+   * Loader class, used to load classes :P
+   */
+  public function __construct() {
     /**
-     * Allow the access to $instance
+     * Allow the use of $this->load
      */
      self::$instance = $this;
     /**
-     * Include application classes and stuff
+     * Load application core classes
      */
-     require(APP_DIR . 'config/Config.php');
+     require(APP_DIR . 'config' . DIRECTORY_SEPARATOR . 'Config.php');
      require(SYS_DIR . 'Model.php');
      require(SYS_DIR . 'View.php');
      require(SYS_DIR . 'Controller.php');
+     require(SYS_DIR . 'Session.php');
      require(SYS_DIR . 'Bootstrap.php');
   }
 
-  function model($name) {
-    require(APP_DIR . 'models/' . ucfirst(strtolower($name)) . '.php');
+  /**
+   * Get the Loader instance object
+   */
+  public static function &get_instance() {
+    return self::$instance;
+  }
+
+  /**
+   * Load a model, shortcut: $this->load->model()
+   */
+  public function model($name) {
+    require(APP_DIR . 'models' . DIRECTORY_SEPARATOR . ucfirst(strtolower($name)) . '.php');
     return new $name;
   }
 
-  function view($name)	{
-    return new View($name);
+  /**
+   * Load a view, shortcut: $this->load->view()
+   */
+  public function view($name)	{
+    $instance = Controller::get_instance();
+    if(isset($instance->view)) return false;
+    $instance->view = '';
+    $instance->view =& new View($name);
   }
 
-  function helper($name) {
-    require(APP_DIR . 'helpers/' . ucfirst(strtolower($name)) . '.php');
+  /**
+   * Load a helper, shortcut: $this->load->helper()
+   */
+  public function helper($name) {
+    require(APP_DIR . 'helpers' . DIRECTORY_SEPARATOR . ucfirst(strtolower($name)) . '.php');
     return new $name;
   }
 
-  function database() {
+  /**
+   * Load the database, shortcut: $this->load->database()
+   */
+  public function database() {
     $instance = Controller::get_instance();
     if(isset($instance->db)) return false;
     $instance->db = '';
     $instance->db =& new mysqli(Config::$db_host, Config::$db_user, Config::$db_pass, Config::$db_name);
     $instance->db->set_charset(Config::$db_charset);
+  }
+
+  /**
+   * Load the session, shortcut: $this->load->session()
+   */
+  public function session() {
+    $instance = Controller::get_instance();
+    if(isset($instance->session)) return false;
+    $instance->session = '';
+    $instance->session =& new Session();
   }
 }
