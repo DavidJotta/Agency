@@ -22,8 +22,12 @@ class Config {
 
   // URL-related settings
   public static $base_url = ''; // e.g. http(s)://example.com/
+  public static $url_suffix = ''; // e.g. .aspx
 
   // Router-related settings
   public static $default_controller = 'home';
   public static $error_controller = 'error';
+  public static $routes = array(
+    'custom' => 'controller/method'
+  );
 }

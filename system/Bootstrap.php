@@ -31,6 +31,8 @@ class Bootstrap {
   public function __construct() {
     // Split URL
     $this->splitUrl();
+    // Check for routes
+    $this->controller = array_search($this->controller, Config::$routes);
     // Check controller and method existance
     if(!$this->controller) $this->controller = Config::$default_controller;
     if(!file_exists(APP_DIR . 'controllers/' . $this->controller . '.php')) $this->controller = Config::$error_controller;
